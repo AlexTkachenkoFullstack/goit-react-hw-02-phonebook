@@ -10,7 +10,13 @@ class ContactList extends Component{
         return (
             <ul >
                 {this.findContacts().map(({ id, name, number })=>{
-                    return <li key={id}>{name}: { number}</li>
+                    return (
+                        <li key={id}>
+                            <p>{name}: {number}</p>
+                            <button type="button">Delete</button> 
+                        </li>
+                        
+                    )
                 })}
             </ul>
         )

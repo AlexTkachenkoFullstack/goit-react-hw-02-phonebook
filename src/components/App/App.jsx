@@ -11,14 +11,15 @@ class App extends Component {
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'}],
     filter: ''
-}
-
-  onSubmit = ({ id, name, number }) => {
-    this.state.contacts.find(item => item.name !== name)
-      ? this.setState({ contacts: [...this.state.contacts, { id, number, name }] })
-      : console.log('rrrrrrrrrrrrr')
   }
   
+
+
+  onSubmit = ({ id, name, number }) => {
+    this.setState({ contacts: [...this.state.contacts, { id, number, name }] })
+  }
+  
+
   handleCnangeFilter = (event) => {
     this.setState({ filter: event.target.value })
   }
@@ -28,7 +29,7 @@ class App extends Component {
     return (
       <AppContainer>
          <h1>Phonebook</h1>
-         <ContactForm onSubmit={this.onSubmit}/>
+        <ContactForm onSubmit={this.onSubmit} contacts={ this.state.contacts} />
          <h2>Contacts</h2>
          <Filter  onChangeFilter={this.handleCnangeFilter}  />
          <ContactList contacts={this.state.contacts} filter={this.state.filter}/>

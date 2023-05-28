@@ -8,12 +8,16 @@ class ContactForm extends Component{
     }
 
     handleSubmit = (event) => {
-    event.preventDefault()
-    const contactId = nanoid()
-   this.props.onSubmit({...this.state, id: contactId})
-    event.target.name.value = ''
-    event.target.number.value=''
-    this.reset()
+        event.preventDefault()
+        const contactId = nanoid()
+        if (this.props.contacts.some(item => item.name === event.target.name.value)) {
+            alert(`${event.target.name.value} is already in contacts`)
+            return
+        }  
+           this.props.onSubmit({ ...this.state, id: contactId })
+            event.target.name.value = ''
+            event.target.number.value=''
+            this.reset()   
     }
     
      reset = () => {
