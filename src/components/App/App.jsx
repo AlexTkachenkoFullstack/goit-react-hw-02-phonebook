@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter';
-import { AppContainer } from './App.styled';
+import { AppContainer,ApiTitleH1, ApiTitleH2 } from './App.styled';
 class App extends Component {
   state = {
   contacts: [{id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -24,15 +24,19 @@ class App extends Component {
     this.setState({ filter: event.target.value })
   }
 
+ deleteContact = (idContact) => {
+    this.setState((prevState)=>({ contacts: prevState.contacts.filter(({id})=>id!==idContact)}))
+  }
+
 
   render() {
     return (
       <AppContainer>
-         <h1>Phonebook</h1>
+         <ApiTitleH1>Phonebook</ApiTitleH1>
         <ContactForm onSubmit={this.onSubmit} contacts={ this.state.contacts} />
-         <h2>Contacts</h2>
+         <ApiTitleH2>Contacts</ApiTitleH2>
          <Filter  onChangeFilter={this.handleCnangeFilter}  />
-         <ContactList contacts={this.state.contacts} filter={this.state.filter}/>
+        <ContactList contacts={this.state.contacts} filter={this.state.filter} onDeleteContact={this.deleteContact} />
       </AppContainer>
     )
   }

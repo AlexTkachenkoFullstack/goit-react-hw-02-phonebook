@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { nanoid } from 'nanoid'
+import PropTypes from 'prop-types';
 import { FormContainer, FormLabelName, FormInputName, FormInputTel,  FormButton } from "./ContactForm.styled";
 class ContactForm extends Component{
     state = {
@@ -42,6 +43,7 @@ class ContactForm extends Component{
                         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                         required
                         onChange={this.handleChange}/>
+                    <FormLabelName htmlFor="number">Number</FormLabelName>
                     <FormInputTel
                         type="tel"
                         name="number"
@@ -55,3 +57,14 @@ class ContactForm extends Component{
 }
 
 export default ContactForm
+
+ContactForm.propTypes = {
+    contacts: PropTypes.arrayOf(
+        PropTypes.exact({
+            name: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            number:PropTypes.string.isRequired
+                })
+    ),
+    onSubmit:PropTypes.func.isRequired
+}
