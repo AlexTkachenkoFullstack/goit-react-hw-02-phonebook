@@ -45,22 +45,21 @@ class ContactForm extends Component{
                     validationSchema={schame}
                 >
                         <FormContainer autoComplete="off">
-                        <FormLabelName >Name
-                            <FormInputName 
-                                type="text"
-                                name="name" 
-                            />
-                            <FormError name="name"/>
-                        </FormLabelName>
-                            
-                        <FormLabelName>Number
-                            <FormInputTel
-                                type="number"
-                                name="number"
-                            />
-                            <FormError name="number"/>
-                        </FormLabelName>
-                           
+                            <FormLabelName >Name
+                                <FormInputName 
+                                    type="text"
+                                    name="name" 
+                                />
+                                <FormError name="name"/>
+                            </FormLabelName>
+                                
+                            <FormLabelName>Number
+                                <FormInputTel
+                                    type="number"
+                                    name="number"
+                                />
+                                <FormError name="number"/>
+                            </FormLabelName>
                             <FormButton type='submit'>Add contact</FormButton>
                         </FormContainer>
                 </Formik>)    
