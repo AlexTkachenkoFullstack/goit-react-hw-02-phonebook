@@ -7,7 +7,7 @@ class Filter extends Component{
     render() {
         return (<FilterContainer>
                     <FilterLable htmlFor="findContacts">Find contacts by name</FilterLable>
-                    <FilterInput type="text" id='findContacts'onChange={this.props.onChangeFilter}/>
+                    <FilterInput type="text" id='findContacts' onChange={this.props.onChangeFilter}/>
                 </FilterContainer>
                 )
             }
