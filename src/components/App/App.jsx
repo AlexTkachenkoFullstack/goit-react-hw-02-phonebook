@@ -16,7 +16,8 @@ class App extends Component {
 
 
   onSubmit = ({ id, name, number }) => {
-    this.setState({ contacts: [...this.state.contacts, { id, number, name }] })
+    this.setState((prevState)=>({contacts: [...prevState.contacts, { id, number, name }] })
+    )
   }
   
 

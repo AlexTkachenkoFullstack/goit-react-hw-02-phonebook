@@ -24,6 +24,7 @@ const FormError = (props) => {
     />)
 }
     
+
 class ContactForm extends Component{
 
     handleSubmit = (values, actions) => {
