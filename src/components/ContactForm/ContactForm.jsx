@@ -1,16 +1,16 @@
 // 1-ЫЙ ВЫРИАНТ С БИБЛИОТЕКАМИ FORMIK И YUP
 
 import React, { Component } from "react";
-import { nanoid } from 'nanoid'
 import PropTypes from 'prop-types';
 import { FormContainer, FormLabelName, FormInputName, FormInputTel,  FormButton, ErrorText } from "./ContactForm.styled";
 import { Formik, ErrorMessage } from 'formik';
 import *as yup from 'yup'
 
  const schame = yup.object({
-  name: yup.string("It should be string").required("It shouldn't be empty").max(30).trim(),
+  name: yup.string("It should be string").required("It shouldn't be empty").max(30).trim().matches(),
   number: yup.number("It shold be number").required().positive()
  });
+
 
  const initialValue = {
         name: '',
@@ -27,21 +27,10 @@ const FormError = (props) => {
 
 class ContactForm extends Component{
 
-    handleSubmit = (values, actions) => {
-        const contactId = nanoid()
-        if (this.props.contacts.some(item => item.name === values.name))
-            {
-            alert(`${values.name} is already in contacts`)
-            return
-            }  
-            this.props.onSubmit({ name: values.name, number: values.number.toString(), id: contactId })
-            actions.resetForm()
-        }
-    
     render() {
         return (<Formik
                     initialValues={initialValue}
-                    onSubmit={this.handleSubmit}
+                    onSubmit={this.props.onSubmit}
                     validationSchema={schame}
                 >
                         <FormContainer autoComplete="off">
@@ -69,14 +58,11 @@ class ContactForm extends Component{
 export default ContactForm
 
 ContactForm.propTypes = {
-    contacts: PropTypes.arrayOf(
-        PropTypes.exact({
+    onSubmit: PropTypes.func.isRequired,
+    initialValues:PropTypes.exact({
             name: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired,
             number:PropTypes.string.isRequired
                 })
-    ),
-    onSubmit:PropTypes.func.isRequired
 }
 
 

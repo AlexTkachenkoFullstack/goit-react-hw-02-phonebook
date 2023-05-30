@@ -4,15 +4,12 @@ import { IoPersonCircleSharp   } from "react-icons/io5";
 import { ContactListContainer, ContactListItem, ContactListItemInfo, ContactListItemText, ButtonDeliteContact } from "./ContactList.styled";
 class ContactList extends Component{
   
- findContacts = () => {
-     const  сontactMatches= this.props.contacts.filter(({name})=>(name.toUpperCase().includes(this.props.filter.toUpperCase())))
-   return сontactMatches
-  }
+ 
 
     render() {
         return (
             <ContactListContainer >
-                {this.findContacts().map(({ id, name, number })=>{
+                {this.props.filter().map(({ id, name, number })=>{
                     return (
                         <ContactListItem key={id}>
                             <IoPersonCircleSharp />
@@ -44,6 +41,5 @@ ContactList.propTypes = {
             number:PropTypes.string.isRequired
                 })
     ),
-    filter: PropTypes.string.isRequired,
     onDeleteContact: PropTypes.func.isRequired
 }

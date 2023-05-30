@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter';
+import { nanoid } from 'nanoid'
 import { AppContainer,ApiTitleH1, ApiTitleH2 } from './App.styled';
 class App extends Component {
   state = {
@@ -13,14 +14,6 @@ class App extends Component {
     filter: ''
   }
   
-
-
-  onSubmit = ({ id, name, number }) => {
-    this.setState((prevState)=>({contacts: [...prevState.contacts, { id, number, name }] })
-    )
-  }
-  
-
   handleCnangeFilter = (event) => {
     this.setState({ filter: event.target.value })
   }
@@ -29,15 +22,38 @@ class App extends Component {
     this.setState((prevState)=>({ contacts: prevState.contacts.filter(({id})=>id!==idContact)}))
   }
 
+  findContacts = () => {
+     const  сontactMatches= this.state.contacts.filter(({name})=>(name.toUpperCase().includes(this.state.filter.toUpperCase())))
+   return сontactMatches
+  }
+
+  handleSubmit = (values, actions) =>
+  {
+        const contactId = nanoid()
+          if (this.state.contacts.some(item => item.name === values.name))
+            {
+            alert(`${values.name} is already in contacts`)
+            return
+            }  
+      this.setState((prevState) =>
+      (
+        {
+          contacts: [...prevState.contacts,
+          { name: values.name, number: values.number.toString(), id: contactId }]
+        }
+      )
+                  )
+        actions.resetForm()
+  }
 
   render() {
     return (
       <AppContainer>
          <ApiTitleH1>Phonebook</ApiTitleH1>
-        <ContactForm onSubmit={this.onSubmit} contacts={ this.state.contacts} />
+        <ContactForm onSubmit={this.handleSubmit} contacts={ this.state.contacts} />
          <ApiTitleH2>Contacts</ApiTitleH2>
          <Filter  onChangeFilter={this.handleCnangeFilter}  />
-        <ContactList contacts={this.state.contacts} filter={this.state.filter} onDeleteContact={this.deleteContact} />
+        <ContactList contacts={this.state.contacts} filter={this.findContacts} onDeleteContact={this.deleteContact} />
       </AppContainer>
     )
   }
