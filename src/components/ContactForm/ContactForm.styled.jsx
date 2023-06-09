@@ -89,7 +89,7 @@ outline: none;
     height: calc(100% + 4px);
     opacity: 0;
     transition: opacity 0.3s easy-in-out;
-    border-redius: 10px;
+    border-radius: 10px;
     animation: glow 15s linear infinite;
 }
 
